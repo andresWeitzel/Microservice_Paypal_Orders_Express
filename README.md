@@ -1,5 +1,5 @@
 # Module_PayPal_Integration_ExpressJs
-Módulo para la integración de los servicios de Paypal implementado con ExpressJs, Nodejs, Typescript, etc.
+Módulo para la integración de los servicios de Paypal implementado con ExpressJs, Nodejs, Typescript, nodemon, morgan, dotenv, cors, etc.
 
 
 ### Documentación
@@ -189,29 +189,38 @@ npm init
 node_modules
 ```
 * Creamos un direct source (src) para agregar toda la lógica de nuestra app
-* Instalamos el plugin para sequelize
+* Instalamos el paquete para el uso de Nodejs con Typescript
 ```git
-npm i sequelize
+npm i --save-dev @types/node
 ```
-* Instalamos los plugins para postgreSQL
+* Instalamos lo necesario para usar typescript
 ```git
-npm i pg pg-hstore
+# Locally in your project.
+npm install -D typescript
+npm install -D ts-node
+
+# Or globally with TypeScript.
+npm install -g typescript
+npm install -g ts-node
+
+# Depending on configuration, you may also need these
+npm install -D tslib @types/node
 ```
 * Instalamos el plugin para [express (framework)](https://www.npmjs.com/package/express)
 ```git
-npm i express
+npm i --save-dev @types/express
 ```
 * Instalamos el plugin para [cors (gestión de recursos)](https://www.npmjs.com/package/cors)
 ```git
-npm i cors
+npm i --save-dev @types/cors
 ```
 * Instalamos el plugin para [dotenv (variables de entorno)](https://www.npmjs.com/package/dotenv)
 ```git
-npm i dotenv
+npm i --save-dev @types/dotenv
 ```
 * Instalamos el plugin para [morgan-middleware (errores, formatos, etc)](https://expressjs.com/en/resources/middleware/morgan.html)
 ```git
-npm i morgan
+npm i --save-dev @types/morgan
 ```
 * Instalamos el plugin para [nodemon (autoreload server)](https://www.npmjs.com/package/nodemon) de forma global
 ```git
@@ -219,11 +228,7 @@ npm i -g nodemon
 ```
 * Instalamos el plugin para [nodemon (autoreload server)](https://www.npmjs.com/package/nodemon) para desarrollo
 ```git
-npm i nodemon --save-dev
-```
-* Instalamos los plugins para el uso de [swagger](https://www.google.com.ar/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjKhYbuxO7_AhWcqpUCHZX1DGIQFnoECBAQAQ&url=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fswagger-ui-express&usg=AOvVaw298jcT8gyPCXrfFgV1z8o6&opi=89978449)
-```git
-npm i swagger-ui-express swagger-jsdoc
+npm i nodemon
 ```
 * Las variables de entorno utilizadas en el proyecto se mantienen para simplificar el proceso de configuración de las mismas. Es recomendado agregar el archivo correspondiente (.env) al .gitignore.
 * El siguiente script configurado en el package.json del proyecto es el encargado de
@@ -231,13 +236,13 @@ npm i swagger-ui-express swagger-jsdoc
    * Levantar el servidor con express y nodemon (entorno local dev)
  ```git
  "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.ts",
+    "start:dev": "nodemon src/server.ts"
   },
 ```
 * Ejecutamos la app desde terminal para entorno local.
 ```git
-npm run dev
+npm run start:dev
 ```
 * Ejecutamos la app desde terminal para entorno productivo.
 ```git
@@ -246,7 +251,7 @@ npm start
 * Si se presenta algún mensaje indicando qué el puerto 8080 ya está en uso, podemos terminar todos los procesos dependientes y volver a ejecutar la app
 ```git
 npx kill-port 8080
-npm run dev o npm start
+npm run start:dev o npm start
 ```
 
 
