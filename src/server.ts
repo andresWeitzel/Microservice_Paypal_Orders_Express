@@ -2,7 +2,7 @@
 //Config for .dotenv
 import * as dotenv from "dotenv";
 import 'dotenv/config';
-import * as express from 'express';
+import express from "express";
 //Environment vars
 const APP_PORT = process.env.APP_FIRST_PORT || process.env.APP_SECOND_PORT;
 //Config middleware
@@ -12,11 +12,10 @@ import {appMiddleware} from "./config/middleware";
  * @description function in charge of starting the server, adding the initial configuration and setting the http routes
  * @returns active instance of the server for handling requests and responses
  */
-const run = () => {
+const run = async() => {
   try {
     //Middleware
-    const app:any = appMiddleware();
-    console.log(app);
+    const app:any = await appMiddleware();
 
     //Server
      app.listen(APP_PORT, () => {

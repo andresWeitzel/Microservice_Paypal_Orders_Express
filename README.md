@@ -206,28 +206,27 @@ npm install -g ts-node
 # Depending on configuration, you may also need these
 npm install -D tslib @types/node
 ```
-* Instalamos el plugin para [express (framework)](https://www.npmjs.com/package/express)
+* Instalamos los plugins para [express (framework)](https://www.npmjs.com/package/express) para ts y nodejs
 ```git
 npm i --save-dev @types/express
+npm i express
 ```
 * Instalamos el plugin para [cors (gestión de recursos)](https://www.npmjs.com/package/cors)
 ```git
 npm i --save-dev @types/cors
+npm i cors
 ```
 * Instalamos el plugin para [dotenv (variables de entorno)](https://www.npmjs.com/package/dotenv)
 ```git
 npm i --save-dev @types/dotenv
 ```
-* Instalamos el plugin para [morgan-middleware (errores, formatos, etc)](https://expressjs.com/en/resources/middleware/morgan.html)
+* Instalamos el plugin para [morgan-middleware (errores, formatos, etc)](https://levelup.gitconnected.com/better-logs-for-expressjs-using-winston-and-morgan-with-typescript-1c31c1ab9342)
 ```git
-npm i --save-dev @types/morgan
+npm i morgan @types/morgan
 ```
-* Instalamos el plugin para [nodemon (autoreload server)](https://www.npmjs.com/package/nodemon) de forma global
+* Instalamos el plugin para [nodemon (autoreload server)](https://www.npmjs.com/package/nodemon) de forma global y local
 ```git
 npm i -g nodemon
-```
-* Instalamos el plugin para [nodemon (autoreload server)](https://www.npmjs.com/package/nodemon) para desarrollo
-```git
 npm i nodemon
 ```
 * Las variables de entorno utilizadas en el proyecto se mantienen para simplificar el proceso de configuración de las mismas. Es recomendado agregar el archivo correspondiente (.env) al .gitignore.

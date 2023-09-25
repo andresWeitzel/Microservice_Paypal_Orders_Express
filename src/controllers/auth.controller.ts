@@ -1,8 +1,11 @@
 //External
-import * as dotenv from "dotenv";
-import 'dotenv/config';
+import  {Request, Response} from 'express';
+import "dotenv/config";
 const axios = require("axios");
-
+//Const-vars
+let tokenData: any;
+let axiosResponse:any;
+let reqBody: any 
 
 /**
  * @description Controlle to get an access token from paypal api
@@ -11,22 +14,25 @@ const axios = require("axios");
  * @returns  an object with the token and information from paypal api
  * @example
  */
-export const getAccessToken = async(req,res)=> {
-    try {
-      await axios.post(
-        req.url
-        ,new URLSearchParams({
-        'grant_type': 'client_credentials'
+export const getAccessToken = async (req: Request, res: Response) => {
+  try {
+    reqBody = req.body;
+    axiosResponse = await axios.post(
+      reqBody.url,
+      new URLSearchParams({
+        grant_type: "client_credentials"
       }),
       {
         auth: {
-          username: req.apiPaypalClientValue,
-          password: req.apiPaypalSecretKeyValue
+          username: reqBody.apiPaypalClientValue,
+          password: reqBody.apiPaypalSecretKeyValue
         }
-      }).then(function (response) {
-        console.log(response);
-      });
-    } catch (error) {
-      console.log(`Error in getAccessToken controller. Caused by ${error}`);
-    }
+      }
+    );
+    tokenData = axiosResponse.data;
+  } catch (error) {
+    console.log(`Error in getAccessToken controller. Caused by ${error}`);
+    tokenData = null;
   }
+  res.status(200).send(tokenData);
+};

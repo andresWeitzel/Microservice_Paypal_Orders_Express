@@ -1,15 +1,15 @@
 //External
-import express from 'express';
-import * as morgan from "morgan";
-import * as cors from "cors";
-import * as listEndpoints from "express-list-endpoints";
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+import listEndpoints from "express-list-endpoints";
 //Config for .dotenv
-import * as dotenv from "dotenv";
 import 'dotenv/config';
 //Env vars
-const API_LOCAL_BASE_URL = process.env.API_LOCAL_BASE_URL;
-const APP_PORT = process.env.APP_FIRST_PORT || process.env.APP_SECOND_PORT;
-const API_AUTH_NAME_URL = process.env.API_AUTH_NAME_URL;
+const API_LOCAL_BASE_URL:string = process.env.API_LOCAL_BASE_URL || '';
+const APP_PORT:string = process.env.APP_FIRST_PORT || process.env.APP_SECOND_PORT || '';
+const API_AUTH_NAME_URL:string = process.env?.API_AUTH_NAME_URL || '';
+const API_LOCAL_BASE_ENDPOINT:string = `${API_LOCAL_BASE_URL}:${APP_PORT}` || '';
 //Config router
 import { authRouter } from "../routes/auth-routes";
 
@@ -17,7 +17,7 @@ import { authRouter } from "../routes/auth-routes";
  * @description initial settings for cors, express, etc (Middleware)
  * @returns an express object with the initial settings
  */
-export const appMiddleware = () => {
+export const appMiddleware = async() => {
   try {
     // Initialize the express engine
     const app = express();
@@ -28,7 +28,7 @@ export const appMiddleware = () => {
      //-- start cors --
     //Set cors
     var corsOptions = {
-      origin: `${API_LOCAL_BASE_URL}:${APP_PORT}`,
+      origin: API_LOCAL_BASE_ENDPOINT,
     };
     //Use cors options
     app.use(cors(corsOptions));
