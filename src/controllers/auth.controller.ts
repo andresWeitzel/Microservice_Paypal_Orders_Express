@@ -6,7 +6,8 @@ const axios = require("axios");
 import { statusCode } from "../enum/http/status-code";
 //Helpers
 import { validateHeadersAndKeys } from "../helpers/validations/headers/validateHeadersAndKeys";
-import { decoding } from "../helpers/cryptography/authorization";
+import { decoding } from "../helpers/cryptography/http/headers/authorization";
+import { getAccessTokenFromPaypal } from "../helpers/axios/paypal/request/get-access-token";
 //Const-vars
 const statusCodeInternalServerError = statusCode.INTERNAL_SERVER_ERROR;
 const statusCodeBadRequest = statusCode.BAD_REQUEST;
@@ -16,6 +17,7 @@ let axiosResponse: any;
 let reqBody: any;
 let eventHeaders: any;
 let checkEventHeadersAndKeys: any;
+let credentials: Object | any;
 
 /**
  * @description Controlle to get an access token from paypal api
@@ -38,24 +40,16 @@ export const getAccessToken = async (req: Request, res: Response) => {
     }
     //-- end with validation headers and keys  ---
 
-  await decoding(req);
+    credentials = await decoding(req);
 
+    if (credentials == (null || undefined || "")) {
+      return res
+        .status(statusCodeBadRequest)
+        .send({ error: "Could not obtain username and password credentials" });
+    }
 
     //-- start with axios token operation  ---
-    reqBody = req.body;
-    axiosResponse = await axios.post(
-      reqBody.url,
-      new URLSearchParams({
-        grant_type: "client_credentials"
-      }),
-      {
-        auth: {
-          username: reqBody.apiPaypalClientValue,
-          password: reqBody.apiPaypalSecretKeyValue
-        }
-      }
-    );
-    tokenData = axiosResponse.data;
+    tokenData = await getAccessTokenFromPaypal(req,credentials);
     //-- end with axios token operation  ---
   } catch (error) {
     console.log(`Error in getAccessToken controller. Caused by ${error}`);
@@ -63,7 +57,9 @@ export const getAccessToken = async (req: Request, res: Response) => {
   }
   switch (tokenData) {
     case null:
-      return res.status(statusCodeInternalServerError).send({ error: tokenData });
+      return res
+        .status(statusCodeInternalServerError)
+        .send({ error: tokenData });
     case tokenData != null:
       return res.status(statusCodeOk).send(tokenData);
     default:

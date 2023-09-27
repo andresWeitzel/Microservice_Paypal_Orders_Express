@@ -5,6 +5,7 @@ let eventHeaders: any;
 let encripted: any;
 let user: any;
 let password: any;
+let credentials: Object | any;
 
 export const decoding = async (req: Request) => {
   try {
@@ -16,12 +17,13 @@ export const decoding = async (req: Request) => {
     ).toString();
     user = encripted.split(":")[0];
     password = encripted.split(":")[1];
-
-    console.log({ USER: user });
-    console.log({ PASSWORD: password });
+    credentials = {
+      user: user,
+      password: password
+    };
   } catch (error) {
     console.error(`ERROR in function decoding(). Caused by ${error} .`);
+    credentials=null;
   }
-
-  return user + password;
+  return credentials;
 };

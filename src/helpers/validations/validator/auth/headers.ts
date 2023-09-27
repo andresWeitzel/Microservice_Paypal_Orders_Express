@@ -10,8 +10,6 @@ let validate:any;
 export const validateAuthHeaders = async (eventHeaders:any) => {
 
   authorization = eventHeaders["authorization"] || '';
-  console.log({AUTH:authorization});
-
   validate = true;
 
   if ( !authorization.includes('Basic')
