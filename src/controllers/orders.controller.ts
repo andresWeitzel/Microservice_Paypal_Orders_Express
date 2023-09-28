@@ -13,6 +13,7 @@ const statusCodeInternalServerError = statusCode.INTERNAL_SERVER_ERROR;
 const statusCodeBadRequest = statusCode.BAD_REQUEST;
 const statusCodeOk = statusCode.OK;
 let tokenData: any;
+let orderData:any;
 let eventHeaders: any;
 let checkEventHeadersAndKeys: any;
 let credentials: Object | any;
@@ -38,23 +39,21 @@ export const createOrderController = async (req: Request, res: Response) => {
       }
       //-- end with validation headers and keys  ---
   
-
-  
       //-- start with axios order operation  ---
-      tokenData = await createOrderFromPaypal(req);
+      orderData = await createOrderFromPaypal(req);
       //-- end with axios order operation  ---
     } catch (error) {
       console.log(`Error in createOrderController controller. Caused by ${error}`);
-      tokenData = error;
+      orderData = error;
     }
-    // switch (tokenData) {
-    //   case null:
-    //     return res
-    //       .status(statusCodeInternalServerError)
-    //       .send({ error: tokenData });
-    //   case tokenData != null:
-    //     return res.status(statusCodeOk).send(tokenData);
-    //   default:
-    //     return res.status(statusCodeOk).send(tokenData);
-    // }
+    switch (orderData) {
+      case null:
+        return res
+          .status(statusCodeInternalServerError)
+          .send({ error: orderData });
+      case orderData != null:
+        return res.status(statusCodeOk).send(orderData);
+      default:
+        return res.status(statusCodeOk).send(orderData);
+    }
   };
