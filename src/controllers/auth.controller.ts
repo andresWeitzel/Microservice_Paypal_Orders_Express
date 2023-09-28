@@ -1,32 +1,29 @@
 //External
 import { Request, Response } from "express";
 import "dotenv/config";
-const axios = require("axios");
 //Enums
 import { statusCode } from "../enum/http/status-code";
 //Helpers
 import { validateHeadersAndKeys } from "../helpers/validations/headers/validateHeadersAndKeys";
 import { decoding } from "../helpers/cryptography/http/headers/authorization";
-import { getAccessTokenFromPaypal } from "../helpers/axios/paypal/request/get-access-token";
+import { getAccessTokenFromPaypal } from "../helpers/axios/paypal/request/auth";
 //Const-vars
 const statusCodeInternalServerError = statusCode.INTERNAL_SERVER_ERROR;
 const statusCodeBadRequest = statusCode.BAD_REQUEST;
 const statusCodeOk = statusCode.OK;
 let tokenData: any;
-let axiosResponse: any;
-let reqBody: any;
 let eventHeaders: any;
 let checkEventHeadersAndKeys: any;
 let credentials: Object | any;
 
 /**
- * @description Controlle to get an access token from paypal api
+ * @description Controller to get an access token from paypal api
  * @param {any} req any type
  * @param {any} res any type
  * @returns  an object with the token and information from paypal api
  * @example
  */
-export const getAccessToken = async (req: Request, res: Response) => {
+export const getAccessTokenController = async (req: Request, res: Response) => {
   try {
     //-- start with validation headers and keys  ---
     eventHeaders = req.headers;
