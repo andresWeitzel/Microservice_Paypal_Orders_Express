@@ -8,3 +8,8 @@ ordersRouter.post(
     "/create-order",
     createOrderController
 );
+
+// ordersRouter.get(
+//     "/create-order/:id",
+//     getOrderController
+// );

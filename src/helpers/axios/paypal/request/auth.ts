@@ -1,16 +1,24 @@
 //External
-import { Request } from "express";
 const axios = require("axios");
+//Config for .dotenv
+import 'dotenv/config';
 //Const-vars
-let reqBody: any;
 let axiosResponse: any;
 let tokenData: any;
+const API_PAYPAL_CREATE_TOKEN_URL:string = `${process.env.API_PAYPAL_BASE_URL}:${process.env.API_PAYPAL_CREATE_TOKEN_RESOURCE}` || '';
 
-export const getAccessTokenFromPaypal = async (req: Request, credentials:any) => {
+
+
+/**
+ * @description Function to send a axios post request for get a token from paypal api
+ * @param {any} credentials any type
+ * @returns  an object with token information from paypal api
+ * @example
+ */
+export const getAccessTokenFromPaypal = async (credentials:any) => {
   try {
-    reqBody = req.body;
     axiosResponse = await axios.post(
-      reqBody.url,
+      API_PAYPAL_CREATE_TOKEN_URL,
       new URLSearchParams({
         grant_type: "client_credentials"
       }),

@@ -46,7 +46,7 @@ export const getAccessTokenController = async (req: Request, res: Response) => {
     }
 
     //-- start with axios token operation  ---
-    tokenData = await getAccessTokenFromPaypal(req,credentials);
+    tokenData = await getAccessTokenFromPaypal(credentials);
     //-- end with axios token operation  ---
   } catch (error) {
     console.log(`Error in getAccessToken controller. Caused by ${error}`);
