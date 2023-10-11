@@ -1,13 +1,15 @@
 //External
 const axios = require("axios");
 //Config for .dotenv
-import 'dotenv/config';
+import "dotenv/config";
 //Const-vars
 let axiosResponse: any;
 let tokenData: any;
-const API_PAYPAL_CREATE_TOKEN_URL:string = `${process.env.API_PAYPAL_BASE_URL}:${process.env.API_PAYPAL_CREATE_TOKEN_RESOURCE}` || '';
-
-
+const API_PAYPAL_CREATE_TOKEN_URL: string =
+  `${process.env.API_PAYPAL_BASE_URL}:${process.env
+    .API_PAYPAL_CREATE_TOKEN_RESOURCE}` || "";
+let msgResponse: string;
+let msgLog: string;
 
 /**
  * @description Function to send a axios post request for get a token from paypal api
@@ -15,7 +17,7 @@ const API_PAYPAL_CREATE_TOKEN_URL:string = `${process.env.API_PAYPAL_BASE_URL}:$
  * @returns  an object with token information from paypal api
  * @example
  */
-export const getAccessTokenFromPaypal = async (credentials:any) => {
+export const getAccessTokenFromPaypal = async (credentials: any) => {
   try {
     axiosResponse = await axios.post(
       API_PAYPAL_CREATE_TOKEN_URL,
@@ -30,9 +32,12 @@ export const getAccessTokenFromPaypal = async (credentials:any) => {
       }
     );
     tokenData = axiosResponse.data;
+
+    return tokenData;
   } catch (error) {
-    console.error(`ERROR in function getAccessTokenFromPaypal(). Caused by ${error} .`);
-    tokenData=null;
+    msgResponse = "ERROR in getAccessTokenFromPaypal() function controller.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return null;
   }
-  return tokenData;
 };

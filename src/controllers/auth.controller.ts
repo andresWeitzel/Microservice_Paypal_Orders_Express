@@ -15,6 +15,8 @@ let tokenData: any;
 let eventHeaders: any;
 let checkEventHeadersAndKeys: any;
 let credentials: Object | any;
+let msgResponse:string;
+let msgLog:string;
 
 /**
  * @description Controller to get an access token from paypal api
@@ -29,7 +31,7 @@ export const getAccessTokenController = async (req: Request, res: Response) => {
     eventHeaders = req.headers;
 
     checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
-
+    
     if (checkEventHeadersAndKeys != (null || "")) {
       return res
         .status(statusCodeBadRequest)
@@ -48,18 +50,23 @@ export const getAccessTokenController = async (req: Request, res: Response) => {
     //-- start with axios token operation  ---
     tokenData = await getAccessTokenFromPaypal(credentials);
     //-- end with axios token operation  ---
+
+    switch (tokenData) {
+      case null:
+        return res
+          .status(statusCodeInternalServerError)
+          .send({ error: "Could not obtain a token. Check the credentials" });
+      case tokenData != null:
+        return res.status(statusCodeOk).send(tokenData);
+      default:
+        return res.status(statusCodeOk).send(tokenData);
+    }
+
   } catch (error) {
-    console.log(`Error in getAccessToken controller. Caused by ${error}`);
-    tokenData = error;
+    msgResponse = 'ERROR in getAccessToken() function controller.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return res.status(statusCodeInternalServerError).send({error : msgResponse});
   }
-  switch (tokenData) {
-    case null:
-      return res
-        .status(statusCodeInternalServerError)
-        .send({ error: tokenData });
-    case tokenData != null:
-      return res.status(statusCodeOk).send(tokenData);
-    default:
-      return res.status(statusCodeOk).send(tokenData);
-  }
+
 };

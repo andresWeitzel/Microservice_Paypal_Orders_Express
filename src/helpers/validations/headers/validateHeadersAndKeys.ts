@@ -5,6 +5,8 @@ import { validateAuthHeaders } from "../validator/auth/headers";
 let validateReqParams: boolean;
 let validateAuth: boolean;
 let validateResponse: string;
+let msgResponse: string;
+let msgLog: string;
 
 /**
    * @description Validates that all the necessary headers are correct.
@@ -23,20 +25,23 @@ export const validateHeadersAndKeys = async (inputEventHeaders: any) => {
     validateReqParams = await validateHeadersParams(inputEventHeaders);
 
     if (!validateReqParams) {
-      validateResponse = "Bad request, check missing or malformed headers. Content-type and Authorization is necessary";
+      validateResponse =
+        "Bad request, check missing or malformed headers. Content-type and Authorization is necessary";
     }
 
     validateAuth = await validateAuthHeaders(inputEventHeaders);
 
     if (!validateAuth) {
-      validateResponse = "Not authenticated, check Authorization. This field must be of type Basic Authentication ";
+      validateResponse =
+        "Not authenticated, check Authorization. This field must be of type Basic Authentication ";
     }
     //-- end with validation Headers  ---
-  } catch (error) {
-    console.error(
-      `ERROR in function validateHeadersAndKeys(). Caused by ${error} .`
-    );
-  }
 
-  return validateResponse;
+    return validateResponse;
+  } catch (error) {
+    msgResponse = "ERROR in validateHeadersAndKeys() function.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return null;
+  }
 };

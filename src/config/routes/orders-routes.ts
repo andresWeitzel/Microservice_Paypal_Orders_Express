@@ -1,6 +1,6 @@
 //External
 import {Router} from 'express';
-import { createOrderController } from '../../controllers/orders.controller';
+import { createOrderController, getOrderController } from '../../controllers/orders.controller';
 //Const-vars
 export const ordersRouter = Router();
 
@@ -9,7 +9,7 @@ ordersRouter.post(
     createOrderController
 );
 
-// ordersRouter.get(
-//     "/create-order/:id",
-//     getOrderController
-// );
+ordersRouter.get(
+    "/get-order/:id",
+    getOrderController
+);
