@@ -1,5 +1,5 @@
-# Module_PayPal_Integration_ExpressJs
-Módulo para la integración de los servicios de Paypal implementado con ExpressJs, Nodejs, Typescript, nodemon, morgan, dotenv, cors, etc.
+# Microservice_PayPal_Integration_ExpressJs
+Microservicio para la integración de Paypal implementado con ExpressJs, Nodejs, Typescript, nodemon, morgan, dotenv, cors, etc.
 
 
 ### Documentación

@@ -61,7 +61,6 @@ export const getOrderFromPaypal = async (req: Request) => {
 
     reqHeaders = req.headers;
     reqParams = req.params;
-    reqBody = req.body;
     axiosResponse = null;
 
     const API_PAYPAL_GET_ORDER_URL:string = `${process.env.API_PAYPAL_BASE_URL}${process.env.API_PAYPAL_GET_ORDER_RESOURCE}/${reqParams.id}` || '';
@@ -75,7 +74,7 @@ export const getOrderFromPaypal = async (req: Request) => {
         "Authorization": reqHeaders?.authorization
       }
     }
-    axiosResponse = await axios.post(API_PAYPAL_GET_ORDER_URL, reqBody, config);
+    axiosResponse = await axios.get(API_PAYPAL_GET_ORDER_URL, config);
 
     orderData = axiosResponse.data;
 
