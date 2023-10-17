@@ -1,35 +1,43 @@
-# Module_PayPal_Integration_ExpressJs
+# Module\_PayPal\_Integration\_ExpressJs
+
 Módulo para la integración de los servicios de Paypal implementado con ExpressJs, Nodejs, Typescript, nodemon, morgan, dotenv, cors, etc.
 
-
 ### Documentación
-* [Ejemplo básico de integración paypal](https://www.youtube.com/watch?v=sBenKZqEzpQ)
-* [PayPal developer doc](https://developer.paypal.com/home)
+
+*   [Ejemplo básico de integración paypal](https://www.youtube.com/watch?v=sBenKZqEzpQ)
+*   [PayPal developer doc](https://developer.paypal.com/home)
 
 ### Códigos de integración Paypal
-* [Demo checkout, buttons, etc](https://demo.paypal.com/us/demo/code_samples?)
+
+*   [Demo checkout, buttons, etc](https://demo.paypal.com/us/demo/code_samples?)
 
 ### Pasos Paypal
-1) [Crear cuenta en la app de paypal (btn Login in dashboard)](https://developer.paypal.com/home/)
-2) [Ver o actualizar credenciales de usuario](https://developer.paypal.com/dashboard/applications/sandbox)
-3) [Click en btn `crear app` para validar registro, keys, realizar la integración, etc](https://developer.paypal.com/dashboard/applications/sandbox)
-4) [Ingresar al dashboard y ver la app creada con credenciales. Ingresar a la app para ejecuciones en el entorno sandbox.](https://developer.paypal.com/dashboard/applications/sandbox)
-5) Copiar ClientId y secret key de usuario app en archivo `.env` para interactuar con la api de paypal
+
+1.  [Crear cuenta en la app de paypal (btn Login in dashboard)](https://developer.paypal.com/home/)
+2.  [Ver o actualizar credenciales de usuario](https://developer.paypal.com/dashboard/applications/sandbox)
+3.  [Click en btn `crear app` para validar registro, keys, realizar la integración, etc](https://developer.paypal.com/dashboard/applications/sandbox)
+4.  [Ingresar al dashboard y ver la app creada con credenciales. Ingresar a la app para ejecuciones en el entorno sandbox.](https://developer.paypal.com/dashboard/applications/sandbox)
+5.  Copiar ClientId y secret key de usuario app en archivo `.env` para interactuar con la api de paypal
+
 ```env
 PAYPAL_API_CLIENT = "AY6UZg4..."
 PAYPAL_API_SECRET_KEY ="EJMm8IN..."
 PAYPAL_API_SANDBOX_URL = "https://sandbox.paypal.com"
 ```
-6) [Visualizar cuentas sandbox](https://developer.paypal.com/dashboard/accounts)
-7) [Recursos de la api de paypal](https://developer.paypal.com/api/rest/current-resources/)
-8) [Obtener un access token para las operaciones con curl](https://developer.paypal.com/api/rest/)
+
+6.  [Visualizar cuentas sandbox](https://developer.paypal.com/dashboard/accounts)
+7.  [Recursos de la api de paypal](https://developer.paypal.com/api/rest/current-resources/)
+8.  [Obtener un access token para las operaciones con curl](https://developer.paypal.com/api/rest/)
+
 ```curl
 curl -v -X POST "https://api-m.sandbox.paypal.com/v1/oauth2/token"\
  -u "CLIENT_ID:CLIENT_SECRET"\
  -H "Content-Type: application/x-www-form-urlencoded"\
  -d "grant_type=client_credentials"
 ```
+
 [Obtener un access token para las operaciones desde postman](https://developer.paypal.com/api/rest/)
+
 ```postman
     Set the verb to POST.
     Enter https://api-m.sandbox.paypal.com/v1/oauth2/token as the request URL.
@@ -43,7 +51,9 @@ curl -v -X POST "https://api-m.sandbox.paypal.com/v1/oauth2/token"\
     In the VALUE field, enter client_credentials.
     Select Send.
 ```
-- Response 
+
+*   Response
+
 ```git
 {
 
@@ -118,40 +128,53 @@ curl -v -X POST "https://api-m.sandbox.paypal.com/v1/oauth2/token"\
   <summary>Ver</summary>
 <br>
 
-
 #### 1.1.0) Configuraciones iniciales
-* Una vez creado un entorno de trabajo a través de algún ide, clonamos el proyecto
+
+*   Una vez creado un entorno de trabajo a través de algún ide, clonamos el proyecto
+
 ```git
 git clone https://github.com/andresWeitzel/Module_PayPal_Integration_ExpressJs
 ```
-* Nos posicionamos sobre el proyecto
+
+*   Nos posicionamos sobre el proyecto
+
 ```git
 cd 'projectName'
 ```
-* Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download).
-* Instalamos todas las librerías necesarias
+
+*   Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download).
+*   Instalamos todas las librerías necesarias
+
 ```git
 npm i
 ```
-* Las variables de entorno utilizadas en el proyecto se mantienen para simplificar el proceso de configuración de las mismas. Es recomendado agregar el archivo correspondiente (.env) al .gitignore.
-* El siguiente script configurado en el package.json del proyecto es el encargado de
-   * Levantar el servidor con express (entorno productivo)
-   * Levantar el servidor con express y nodemon (entorno local dev)
- ```git
- "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
-  },
+
+*   Las variables de entorno utilizadas en el proyecto se mantienen para simplificar el proceso de configuración de las mismas. Es recomendado agregar el archivo correspondiente (.env) al .gitignore.
+*   El siguiente script configurado en el package.json del proyecto es el encargado de
+    *   Levantar el servidor con express (entorno productivo)
+    *   Levantar el servidor con express y nodemon (entorno local dev)
+
+```git
+"scripts": {
+   "dev": "nodemon src/server.js",
+   "start": "node src/server.js"
+ },
 ```
-* Ejecutamos la app desde terminal para entorno local.
+
+*   Ejecutamos la app desde terminal para entorno local.
+
 ```git
 npm run dev
 ```
-* Ejecutamos la app desde terminal para entorno productivo.
+
+*   Ejecutamos la app desde terminal para entorno productivo.
+
 ```git
 npm start
 ```
-* Si se presenta algún mensaje indicando qué el puerto 8080 ya está en uso, podemos terminar todos los procesos dependientes y volver a ejecutar la app
+
+*   Si se presenta algún mensaje indicando qué el puerto 8080 ya está en uso, podemos terminar todos los procesos dependientes y volver a ejecutar la app
+
 ```git
 npx kill-port 8080
 npm run dev o npm start
@@ -170,30 +193,41 @@ npm run dev o npm start
 
 <br>
 
-* Una vez creado un entorno de trabajo a través de algún ide, clonamos el proyecto
+*   Una vez creado un entorno de trabajo a través de algún ide, clonamos el proyecto
+
 ```git
 git clone https://github.com/andresWeitzel/Module_PayPal_Integration_ExpressJs
 ```
-* Nos posicionamos sobre el proyecto
+
+*   Nos posicionamos sobre el proyecto
+
 ```git
 cd 'projectName'
 ```
-* Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download)
-* Abrimos una terminal desde vsc
-* Inicializamos un proyecto nodejs
+
+*   Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download)
+*   Abrimos una terminal desde vsc
+*   Inicializamos un proyecto nodejs
+
 ```git
 npm init
 ```
-* Creamos un archivo .gitignore y agregamos los files necesarios (por el momento node_modules)
+
+*   Creamos un archivo .gitignore y agregamos los files necesarios (por el momento node\_modules)
+
 ```git
 node_modules
 ```
-* Creamos un direct source (src) para agregar toda la lógica de nuestra app
-* Instalamos el paquete para el uso de Nodejs con Typescript
+
+*   Creamos un direct source (src) para agregar toda la lógica de nuestra app
+*   Instalamos el paquete para el uso de Nodejs con Typescript
+
 ```git
 npm i --save-dev @types/node
 ```
-* Instalamos lo necesario para usar typescript
+
+*   Instalamos lo necesario para usar typescript
+
 ```git
 # Locally in your project.
 npm install -D typescript
@@ -206,58 +240,74 @@ npm install -g ts-node
 # Depending on configuration, you may also need these
 npm install -D tslib @types/node
 ```
-* Instalamos los plugins para [express (framework)](https://www.npmjs.com/package/express) para ts y nodejs
+
+*   Instalamos los plugins para [express (framework)](https://www.npmjs.com/package/express) para ts y nodejs
+
 ```git
 npm i --save-dev @types/express
 npm i express
 ```
-* Instalamos el plugin para [cors (gestión de recursos)](https://www.npmjs.com/package/cors)
+
+*   Instalamos el plugin para [cors (gestión de recursos)](https://www.npmjs.com/package/cors)
+
 ```git
 npm i --save-dev @types/cors
 npm i cors
 ```
-* Instalamos el plugin para [dotenv (variables de entorno)](https://www.npmjs.com/package/dotenv)
+
+*   Instalamos el plugin para [dotenv (variables de entorno)](https://www.npmjs.com/package/dotenv)
+
 ```git
 npm i --save-dev @types/dotenv
 ```
-* Instalamos el plugin para [morgan-middleware (errores, formatos, etc)](https://levelup.gitconnected.com/better-logs-for-expressjs-using-winston-and-morgan-with-typescript-1c31c1ab9342)
+
+*   Instalamos el plugin para [morgan-middleware (errores, formatos, etc)](https://levelup.gitconnected.com/better-logs-for-expressjs-using-winston-and-morgan-with-typescript-1c31c1ab9342)
+
 ```git
 npm i morgan @types/morgan
 ```
-* Instalamos el plugin para [nodemon (autoreload server)](https://www.npmjs.com/package/nodemon) de forma global y local
+
+*   Instalamos el plugin para [nodemon (autoreload server)](https://www.npmjs.com/package/nodemon) de forma global y local
+
 ```git
 npm i -g nodemon
 npm i nodemon
 ```
-* Las variables de entorno utilizadas en el proyecto se mantienen para simplificar el proceso de configuración de las mismas. Es recomendado agregar el archivo correspondiente (.env) al .gitignore.
-* El siguiente script configurado en el package.json del proyecto es el encargado de
-   * Levantar el servidor con express (entorno productivo)
-   * Levantar el servidor con express y nodemon (entorno local dev)
- ```git
- "scripts": {
-    "start": "node src/server.ts",
-    "start:dev": "nodemon src/server.ts"
-  },
+
+*   Las variables de entorno utilizadas en el proyecto se mantienen para simplificar el proceso de configuración de las mismas. Es recomendado agregar el archivo correspondiente (.env) al .gitignore.
+*   El siguiente script configurado en el package.json del proyecto es el encargado de
+    *   Levantar el servidor con express (entorno productivo)
+    *   Levantar el servidor con express y nodemon (entorno local dev)
+
+```git
+"scripts": {
+   "start": "node src/server.ts",
+   "start:dev": "nodemon src/server.ts"
+ },
 ```
-* Ejecutamos la app desde terminal para entorno local.
+
+*   Ejecutamos la app desde terminal para entorno local.
+
 ```git
 npm run start:dev
 ```
-* Ejecutamos la app desde terminal para entorno productivo.
+
+*   Ejecutamos la app desde terminal para entorno productivo.
+
 ```git
 npm start
 ```
-* Si se presenta algún mensaje indicando qué el puerto 8080 ya está en uso, podemos terminar todos los procesos dependientes y volver a ejecutar la app
+
+*   Si se presenta algún mensaje indicando qué el puerto 8080 ya está en uso, podemos terminar todos los procesos dependientes y volver a ejecutar la app
+
 ```git
 npx kill-port 8080
 npm run start:dev o npm start
 ```
 
-
 <br>
 
 </details>
-
 
 ### 1.3) Comandos de utilidad [🔝](#índice-)
 
@@ -265,7 +315,6 @@ npm run start:dev o npm start
   <summary>Ver</summary>
 
  <br>
-
 
 <br>
 
@@ -343,17 +392,24 @@ npm run start:dev o npm start
   <summary>Ver</summary>
 
  <br>
- 
-### Documentación
-* [Ejemplo básico de integración paypal](https://www.youtube.com/watch?v=sBenKZqEzpQ)
-* [PayPal developer doc](https://developer.paypal.com/home)
 
-### Códigos de integración Paypal
-* [Demo checkout, buttons, etc](https://demo.paypal.com/us/demo/code_samples?)
+#### Documentación
 
+*   [Ejemplo básico de integración paypal](https://www.youtube.com/watch?v=sBenKZqEzpQ)
+*   [PayPal developer doc](https://developer.paypal.com/home)
+
+#### Códigos de integración Paypal
+
+*   [Demo checkout, buttons, etc](https://demo.paypal.com/us/demo/code_samples?)
 
 #### Herramientas
-- [Convert cURL para node-axios](https://curlconverter.com/node-axios/)
+
+*   [Convert cURL para node-axios](https://curlconverter.com/node-axios/)
+
+#### Remark
+
+*   [remark-inline-links](https://github.com/remarkjs/remark-inline-links)
+*   [remark-lint-list-item-indent](https://www.npmjs.com/package/remark-lint-list-item-indent)
 
 <br>
 
