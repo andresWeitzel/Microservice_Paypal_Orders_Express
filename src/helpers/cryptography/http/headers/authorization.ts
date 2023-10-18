@@ -6,6 +6,8 @@ let encripted: any;
 let user: any;
 let password: any;
 let credentials: Object | any;
+let msgResponse: string;
+let msgLog: string;
 
 export const decoding = async (req: Request) => {
   try {
@@ -21,9 +23,12 @@ export const decoding = async (req: Request) => {
       user: user,
       password: password
     };
+    return credentials;
+  
   } catch (error) {
-    console.error(`ERROR in function decoding(). Caused by ${error} .`);
-    credentials=null;
+    msgResponse = "ERROR in decoding() function.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return null;
   }
-  return credentials;
 };
