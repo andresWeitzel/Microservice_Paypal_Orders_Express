@@ -1,6 +1,6 @@
 //External
 import {Router} from 'express';
-import { createOrderController, getOrderController } from '../../controllers/orders.controller';
+import { createOrderController, getOrderController, updateOrderController } from '../../controllers/orders.controller';
 //Const-vars
 export const ordersRouter = Router();
 
@@ -12,4 +12,9 @@ ordersRouter.post(
 ordersRouter.get(
     "/get-order/:id",
     getOrderController
+);
+
+ordersRouter.patch(
+    "/update-order/:id",
+    updateOrderController
 );
