@@ -8,6 +8,7 @@ Módulo para la integración de los servicios de Paypal implementado con Express
 
 *   [Ejemplo básico de integración paypal](https://www.youtube.com/watch?v=sBenKZqEzpQ)
 *   [PayPal developer doc](https://developer.paypal.com/home)
+* [Orders Endpoints](https://developer.paypal.com/docs/api/orders/v2/#orders_create)
 
 ### Códigos de integración Paypal
 

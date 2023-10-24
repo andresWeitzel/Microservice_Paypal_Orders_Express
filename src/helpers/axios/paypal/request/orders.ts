@@ -113,15 +113,18 @@ export const updateOrderFromPaypal = async (req: Request) => {
 
     const API_PAYPAL_UPDATE_ORDER_URL:string = `${API_PAYPAL_BASE_URL}${API_PAYPAL_UPDATE_ORDER_RESOURCE}${reqParams.id}` || "";
 
+    console.log({'API_PAYPAL_UPDATE_ORDER_URL': API_PAYPAL_UPDATE_ORDER_URL});
+    console.log({'REQBODY':reqBody});
+
 
     config={
       headers:{
         "Content-Type": "application/json",
-        "PayPal-Request-Id": reqHeaders?.paypalRequestId,
+        //"PayPal-Request-Id": reqHeaders?.paypalRequestId,
         "Authorization": reqHeaders?.authorization
       }
     }
-    axiosResponse = await axios.post(API_PAYPAL_UPDATE_ORDER_URL,reqBody, config);
+    axiosResponse = await axios.patch(API_PAYPAL_UPDATE_ORDER_URL, reqBody, config);
 
     orderData = axiosResponse.data;
 
