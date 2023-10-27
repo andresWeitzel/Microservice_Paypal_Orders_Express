@@ -1,40 +1,42 @@
 //External
 import { Request } from "express";
 import "dotenv/config";
-//Helper
-import { sendGetRequest } from "../../helpers/axios/request/get";
+//Helpers
+import { sendPostRequest } from "../../helpers/axios/request/post";
 //Const
 //paypal base
 const API_PAYPAL_BASE_URL: string = process.env.API_PAYPAL_BASE_URL || "";
-//paypal get order
-const API_PAYPAL_GET_ORDER_RESOURCE: string =
-  process.env.API_PAYPAL_GET_ORDER_RESOURCE || "";
-//vars
+//paypal update order
+const API_PAYPAL_UPDATE_ORDER_RESOURCE: string =
+  process.env.API_PAYPAL_UPDATE_ORDER_RESOURCE || "";
+//Vars
+let reqBody: any;
 let reqHeaders: any;
 let reqParams: any;
 let axiosConfig: any;
 let axiosData: any;
-let orderData: any;
+let orderUpdated: any;
 let msgResponse: string;
 let msgLog: string;
 
 /**
- * @description Function to send a axios get request for get an order from paypal api
+ * @description Function to send a axios get request for update an order from paypal api
  * @param {any} req any type
  * @returns  an object with order information from paypal api
  * @example
  */
-export const getOrderFromPaypal = async (req: Request) => {
+export const updateOrderFromPaypal = async (req: Request) => {
   try {
     reqHeaders = req.headers;
+    reqBody = req.body;
     reqParams = req.params;
-    orderData = null;
+    orderUpdated = null;
 
-    const API_PAYPAL_GET_ORDER_URL: string =
-      `${API_PAYPAL_BASE_URL}${API_PAYPAL_GET_ORDER_RESOURCE}${reqParams.id}` ||
+    const API_PAYPAL_UPDATE_ORDER_URL: string =
+      `${API_PAYPAL_BASE_URL}${API_PAYPAL_UPDATE_ORDER_RESOURCE}${reqParams.id}` ||
       "";
 
-    axiosData = null;
+    axiosData = reqBody;
 
     axiosConfig = {
       headers: {
@@ -44,15 +46,15 @@ export const getOrderFromPaypal = async (req: Request) => {
       },
     };
 
-    orderData = await sendGetRequest(
-      API_PAYPAL_GET_ORDER_URL,
+    orderUpdated = await sendPostRequest(
+      API_PAYPAL_UPDATE_ORDER_URL,
       axiosData,
       axiosConfig
     );
 
-    return orderData;
+    return orderUpdated;
   } catch (error) {
-    msgResponse = "ERROR in getOrderFromPaypal() function.";
+    msgResponse = "ERROR in updateOrderFromPaypal() function.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return null;
