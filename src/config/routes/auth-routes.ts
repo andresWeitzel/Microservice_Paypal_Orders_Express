@@ -1,6 +1,6 @@
 //External
 import {Router} from 'express';
-import { getAccessTokenController } from '../../controllers/auth.controller';
+import { getAccessTokenController } from '../../controllers/auth/get.controller';
 //Const-vars
 export const authRouter = Router();
 

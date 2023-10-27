@@ -1,6 +1,9 @@
 //External
 import {Router} from 'express';
-import { createOrderController, getOrderController, updateOrderController } from '../../controllers/orders.controller';
+//Controllers
+import { createOrderController } from '../../controllers/orders/create.controller';
+import { getOrderController } from '../../controllers/orders/get.controller';
+import { updateOrderController } from '../../controllers/orders/update.controller';
 //Const-vars
 export const ordersRouter = Router();
 
