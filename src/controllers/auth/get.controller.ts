@@ -1,12 +1,14 @@
 //External
 import { Request, Response } from "express";
 import "dotenv/config";
+//services
+import { getAccessTokenFromPaypal } from "../../services/auth/get.service";
 //Enums
-import { statusCode } from "../enum/http/status-code";
+import { statusCode } from "../../enum/http/status-code";
 //Helpers
-import { validateHeadersAndKeys } from "../helpers/validations/headers/validateHeadersAndKeys";
-import { decoding } from "../helpers/cryptography/http/headers/authorization";
-import { getAccessTokenFromPaypal } from "../helpers/axios/paypal/request/auth";
+import { validateHeadersAndKeys } from "../../helpers/validations/headers/validateHeadersAndKeys";
+import { decoding } from "../../helpers/cryptography/http/headers/authorization";
+// import { getAccessTokenFromPaypal } from "../helpers/axios/paypal/request/auth";
 //Const-vars
 const statusCodeInternalServerError = statusCode.INTERNAL_SERVER_ERROR;
 const statusCodeBadRequest = statusCode.BAD_REQUEST;
