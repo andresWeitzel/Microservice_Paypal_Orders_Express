@@ -6,14 +6,14 @@ import { sendPostRequest } from "../../helpers/axios/request/post";
 //Const
 //paypal base
 const API_PAYPAL_BASE_URL: string = process.env.API_PAYPAL_BASE_URL || "";
-//paypal create order
+//paypal confirm order
 const API_PAYPAL_ORDERS_BASE_URL: string =
   process.env.API_PAYPAL_ORDERS_BASE_URL || "";
-const API_PAYPAL_CREATE_ORDER_URL: string =
-  `${API_PAYPAL_BASE_URL}:${API_PAYPAL_ORDERS_BASE_URL}` || "";
+const API_PAYPAL_CONFIRM_ORDER_RESOURCE:string = process.env.API_PAYPAL_CONFIRM_ORDER_RESOURCE || "";  
 //vars
 let reqBody: any;
 let reqHeaders: any;
+let reqParams:any
 let axiosData: any;
 let axiosConfig: any;
 let orderCreated: any;
@@ -26,31 +26,36 @@ let msgLog: string;
  * @returns  an object with order information from paypal api
  * @example
  */
-export const createOrderFromPaypal = async (req: Request) => {
+export const confirmOrderFromPaypal = async (req: Request) => {
   try {
     reqHeaders = req.headers;
     reqBody = req.body;
+    reqParams = req.params;
     orderCreated = null;
+
+    const API_PAYPAL_CONFIRM_ORDER_URL: string =
+    `${API_PAYPAL_BASE_URL}${API_PAYPAL_ORDERS_BASE_URL}${reqParams.id}${API_PAYPAL_CONFIRM_ORDER_RESOURCE}` ||
+    "";
 
     axiosData = reqBody;
 
     axiosConfig = {
       headers: {
         "Content-Type": "application/json",
-        "PayPal-Request-Id": reqHeaders?.paypalRequestId,
+        //"PayPal-Request-Id": reqHeaders?.paypalRequestId,
         Authorization: reqHeaders?.authorization
       }
     };
 
     orderCreated = await sendPostRequest(
-      API_PAYPAL_CREATE_ORDER_URL,
+        API_PAYPAL_CONFIRM_ORDER_URL,
       axiosData,
       axiosConfig
     );
 
     return orderCreated;
   } catch (error) {
-    msgResponse = "ERROR in createOrderFromPaypal() function.";
+    msgResponse = "ERROR in confirmOrderFromPaypal() function.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return null;

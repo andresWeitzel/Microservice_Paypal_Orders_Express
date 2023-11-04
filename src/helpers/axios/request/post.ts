@@ -15,7 +15,15 @@ let msgLog: string;
  */
 export const sendPostRequest = async (url: string, data: any, config: any) => {
   try {
-    axiosResponse = await axios.post(url, data, config);
+    if (data == (null || undefined) && config == (null || undefined)) {
+      axiosResponse = await axios.post(url);
+    } else if (data == (null || undefined)) {
+      axiosResponse = await axios.post(url, config);
+    } else if (config == (null || undefined)) {
+      axiosResponse = await axios.post(url, data);
+    } else {
+      axiosResponse = await axios.post(url, data, config);
+    }
 
     axiosData = axiosResponse != null ? axiosResponse.data : null;
 

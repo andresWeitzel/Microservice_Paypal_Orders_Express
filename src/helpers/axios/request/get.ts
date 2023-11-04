@@ -15,8 +15,12 @@ let msgLog: string;
  */
 export const sendGetRequest = async (url: string, data: any, config: any) => {
   try {
-    if (data == (null || undefined)) {
+    if (data == (null || undefined) && config == (null || undefined)) {
+      axiosResponse = await axios.get(url);
+    } else if (data == (null || undefined)) {
       axiosResponse = await axios.get(url, config);
+    } else if (config == (null || undefined)) {
+      axiosResponse = await axios.get(url, data);
     } else {
       axiosResponse = await axios.get(url, data, config);
     }
