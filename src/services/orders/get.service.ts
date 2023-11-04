@@ -7,8 +7,8 @@ import { sendGetRequest } from "../../helpers/axios/request/get";
 //paypal base
 const API_PAYPAL_BASE_URL: string = process.env.API_PAYPAL_BASE_URL || "";
 //paypal get order
-const API_PAYPAL_GET_ORDER_RESOURCE: string =
-  process.env.API_PAYPAL_GET_ORDER_RESOURCE || "";
+const API_PAYPAL_ORDERS_BASE_URL: string =
+  process.env.API_PAYPAL_ORDERS_BASE_URL || "";
 //vars
 let reqHeaders: any;
 let reqParams: any;
@@ -31,7 +31,7 @@ export const getOrderFromPaypal = async (req: Request) => {
     orderData = null;
 
     const API_PAYPAL_GET_ORDER_URL: string =
-      `${API_PAYPAL_BASE_URL}${API_PAYPAL_GET_ORDER_RESOURCE}${reqParams.id}` ||
+      `${API_PAYPAL_BASE_URL}${API_PAYPAL_ORDERS_BASE_URL}${reqParams.id}` ||
       "";
 
     axiosData = null;

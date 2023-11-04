@@ -7,9 +7,9 @@ import { sendPostRequest } from "../../helpers/axios/request/post";
 //paypal base
 const API_PAYPAL_BASE_URL: string = process.env.API_PAYPAL_BASE_URL || "";
 //paypal confirm order
-const API_PAYPAL_CONFIRM_ORDER_RESOURCE: string =
-  process.env.API_PAYPAL_CONFIRM_ORDER_RESOURCE || "";
-const API_PAYPAL_CONFIRM_ORDER_RESOURCE_EXTENSION:string = process.env.API_PAYPAL_CONFIRM_ORDER_RESOURCE_EXTENSION || "";  
+const API_PAYPAL_ORDERS_BASE_URL: string =
+  process.env.API_PAYPAL_ORDERS_BASE_URL || "";
+const API_PAYPAL_CONFIRM_ORDER_RESOURCE:string = process.env.API_PAYPAL_CONFIRM_ORDER_RESOURCE || "";  
 //vars
 let reqBody: any;
 let reqHeaders: any;
@@ -34,7 +34,7 @@ export const confirmOrderFromPaypal = async (req: Request) => {
     orderCreated = null;
 
     const API_PAYPAL_CONFIRM_ORDER_URL: string =
-    `${API_PAYPAL_BASE_URL}${API_PAYPAL_CONFIRM_ORDER_RESOURCE}${reqParams.id}${API_PAYPAL_CONFIRM_ORDER_RESOURCE_EXTENSION}` ||
+    `${API_PAYPAL_BASE_URL}${API_PAYPAL_ORDERS_BASE_URL}${reqParams.id}${API_PAYPAL_CONFIRM_ORDER_RESOURCE}` ||
     "";
 
     axiosData = reqBody;
