@@ -1,4 +1,4 @@
-![Index app](./doc/assets/img/paypal-api.png)
+![Index app](./doc/assets/img/paypal_api.png)
 
 # Microservice_PayPal_Integration_ExpressJs
 Microservicio para la integración de Paypal implementado con ExpressJs, Nodejs, Typescript, nodemon, morgan, dotenv, cors, etc.
