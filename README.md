@@ -1,4 +1,14 @@
 ![Index app](./doc/assets/img/paypal_api.png)
+  <div align="right">
+    <img width="24" height="24" src="./doc/assets/icons/backend/javascript-typescript/png/typescript.png" />
+    <img width="24" height="24" src="./doc/assets/icons/integrations/png/paypal.png" />
+    <img width="25" height="25" src="./doc/assets/icons/backend/javascript-typescript/png/express-js.png" />
+    <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
+    <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
+    <img width="29" height="27" src="./doc/assets/icons/devops/png/git.png" />
+  </div>
+
+<br>    
 
 # Microservice_PayPal_Integration_ExpressJs
 Microservicio para la integración de Paypal implementado con ExpressJs, Nodejs, Typescript, nodemon, morgan, dotenv, cors, etc.
