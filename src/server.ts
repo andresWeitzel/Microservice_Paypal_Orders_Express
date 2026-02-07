@@ -9,7 +9,7 @@ const APP_PORT = process.env.APP_FIRST_PORT || process.env.APP_SECOND_PORT;
 import { appMiddleware } from "./config/middleware";
 //Const-vars
 let msgResponse: string;
-let msgLog: string;
+let msgLog: string; 
 
 /**
  * @description function in charge of starting the server, adding the initial configuration and setting the http routes
